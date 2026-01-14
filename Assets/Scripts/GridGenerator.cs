@@ -282,6 +282,11 @@ public class GridGenerator : MonoBehaviour
         return new Vector3(gridPos.x * cellSize, 0f, gridPos.y * cellSize);
     }
 
+    public List<Vector3> GetWaypoints()
+    {
+        return generatedPath.Select(cell => GridToWorldPos(cell)).ToList();
+    }
+
     public Vector2Int WorldToGridPos(Vector3 worldPos)
     {
         return new Vector2Int(
