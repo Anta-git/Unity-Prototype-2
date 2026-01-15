@@ -5,25 +5,25 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public List<Vector3> patrolPoints;
-    public GridGenerator gridGenerator;
+    private float cellSize;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GridGenerator gridGenerator = FindFirstObjectByType<GridGenerator>();
         patrolPoints = gridGenerator.GetWaypoints();
+        cellSize = gridGenerator.getCellSize();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Waits 2 seconds before moving to next waypoint
         if (patrolPoints.Count > 0)
         {
-            float step = 2 * Time.deltaTime; // Speed of movement
-            transform.position = Vector3.MoveTowards(transform.position, patrolPoints[0], step);
-            if (Vector3.Distance(transform.position, patrolPoints[0]) < 0.001f)
+            transform.position = Vector3.MoveTowards(transform.position, (new Vector3(patrolPoints[0].x * cellSize, 0f, patrolPoints[0].z * cellSize)), Time.deltaTime * 2);
+            if (Vector3.Distance(transform.position, patrolPoints[0]) < 0.1f)
             {
-                patrolPoints.RemoveAt(0); // Move to next waypoint
+                patrolPoints.RemoveAt(0);
             }
         }
     }

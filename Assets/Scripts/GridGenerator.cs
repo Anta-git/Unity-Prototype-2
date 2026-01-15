@@ -287,6 +287,11 @@ public class GridGenerator : MonoBehaviour
         return generatedPath.Select(cell => GridToWorldPos(cell)).ToList();
     }
 
+    public float getCellSize()
+    {
+        return cellSize;
+    }
+
     public Vector2Int WorldToGridPos(Vector3 worldPos)
     {
         return new Vector2Int(

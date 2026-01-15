@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -5,25 +6,21 @@ public class EnemySpawner : MonoBehaviour
     public GridGenerator gridGenerator;
     private Vector3 startPositionInWorld;
     public GameObject enemyPrefab;
-    private int enemyCount = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private int enemiesPerWave = 5;
+
+
     void Start()
     {
         startPositionInWorld = gridGenerator.GetStartWorldPos();
+        StartCoroutine(SpawnEnemyRoutine());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator SpawnEnemyRoutine()
     {
-        Coroutine spawnCoroutine = StartCoroutine(SpawnEnemyRoutine());
-    }
-    private System.Collections.IEnumerator SpawnEnemyRoutine()
-    {
-        while (enemyCount < 5)
+        for(int i = 0; i < enemiesPerWave; i++)
         {
             SpawnEnemy();
-            enemyCount++;
-            yield return new WaitForSeconds(5f); // Spawn an enemy every 5 seconds
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
         }
     }
 
