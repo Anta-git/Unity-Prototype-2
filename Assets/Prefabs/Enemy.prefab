@@ -126,4 +126,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   patrolPoints: []
-  gridGenerator: {fileID: 3966566134925280742, guid: cd5fff7c3893b31469b1dcfab4267325, type: 3}
+  speed: 5
